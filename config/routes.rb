@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resource :book_comments, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
   end
-  resources :rooms, only: [:create] do
-    resources :chats, only: [:create, :show]
+  resources :rooms, only: [:create, :show] do
+    resources :chats, only: [:create]
   end
 end

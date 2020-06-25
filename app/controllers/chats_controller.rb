@@ -14,18 +14,6 @@ class ChatsController < ApplicationController
     end
   end
 
-  def show
-    @rooms = current_user.rooms.includes(:messages).order("messages.created_at desc")
-    @room = Room.find(params[:id])
-    if UserRoom.where(user_id: current_user.id, room_id: @room.id).present?
-      @chats = @room.chats.includes(:user).order("created_at asc")
-      @chat = Chat.new
-      @user_rooms = @room.user_rooms
-    else
-      redirect_back(fallback_location: root_path)
-    end
-  end
-  
   private
   def set_room
     @room = Room.find(params[:chat][:room_id])

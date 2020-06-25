@@ -1,0 +1,30 @@
+<div class="left-button">
+  <% @user_rooms.each do |ur| %>
+    <% current_user == ur.user ? @class = "current_user" : @class = ""  %>
+      <% if ur.user != current_user %>
+        <h5 class="text-left <%= @class %>" id="<%= @class %>" style="font-size: 30px;" data-id="<%= ur.user.id %>"><%= "#{ur.user.name}" %>さんとのチャット</h5>
+      <% end %>
+  <% end %>
+</div>
+<hr>
+<div>
+  <% if @chats.present? %>
+    <% @chats.each do |chat| %>
+      <% if chat.user_id == current_user.id %>
+        <div class="dm-right">
+          <%= attachment_image_tag chat.user, :profile_image, fallback: "no_image.jpg", class:"profile-img-circle", size: "40x40" %>
+          <%= chat.user.name %>
+          <%= chat.message %><br>
+          <%= chat.created_at.strftime("%Y/%m/%d %H:%M") %>
+        </div>
+      <% else %>
+        <div class="dm-left">
+          <%= attachment_image_tag chat.user, :profile_image, fallback: "no_image.jpg", class:"profile-img-circle", size: "40x40" %>
+          <%= chat.user.name %>
+          <%= chat.message %><br>
+          <%= chat.created_at.strftime("%Y/%m/%d %H:%M") %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
