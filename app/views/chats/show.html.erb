@@ -1,0 +1,22 @@
+<div class='row'>
+  <div class='col-xs-9'>
+
+    <div class="chat_<%= @room.id %>">
+      <%= render 'chat_area' %>
+    </div>
+
+  </div>
+  <div class='col-xs-3'>
+
+    <div>
+      <%= form_with model:[@room, @chat], data: {remote: true} do |f| %>
+        <%= f.text_area :message, :placeholder => "メッセージを入力して下さい" , :size => 70 %>
+        <%= f.hidden_field :room_id, :value => @room.id %>
+        <br>
+        <%= f.submit "投稿する" %>
+      <% end %>
+    </div>
+
+    <%= link_to "ユーザー一覧に戻る", users_path %>
+
+  </div>

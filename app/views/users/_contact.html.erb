@@ -1,0 +1,15 @@
+<% if user_signed_in? %>
+  <% unless @user.id == current_user.id %>
+    <% if @haveRoom == true %>
+      <%= link_to "ダイレクトメッセージ", room_chat_path(@roomId) %>
+    <% else %>
+    
+      <%= form_with model: @room do |f| %>
+        <%= fields_for @user_room do |e| %>
+          <%= e.hidden_field :user_id, value: @user.id %>
+        <% end %>
+        <%= f.submit "ダイレクトメッセージ" %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
